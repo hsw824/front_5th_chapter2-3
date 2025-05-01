@@ -1,9 +1,10 @@
 import { useState } from "react"
+import { NewPostType } from "../types/postType"
 
 const defaultPost = { title: "", body: "", userId: 1 }
 
 export const useNewPost = () => {
-  const [newPost, setNewPost] = useState(() => defaultPost)
+  const [newPost, setNewPost] = useState<NewPostType>(() => defaultPost)
 
   const addPost = async () => {
     try {
@@ -12,7 +13,7 @@ export const useNewPost = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPost),
       })
-      const data = await response.json()
+      const data: NewPostType = await response.json()
       setNewPost(defaultPost)
       return data
     } catch (error) {

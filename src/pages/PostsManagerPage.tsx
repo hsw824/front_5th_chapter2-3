@@ -11,10 +11,6 @@ import DetailPostDialog from "../components/DetailPostDialog"
 import UserDialog from "../components/UserDialog"
 
 import useSelectPost from "../store/useSelectPost"
-import { Plus } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "../shared/ui/Card"
-import { Button } from "../shared/ui/Button"
-import { useNewPost } from "../store/useNewPost"
 import usePostDialog from "../store/usePostDialog"
 import useNewComment from "../store/useNewComment"
 import useCommentDialog from "../store/useCommentDialog"
@@ -29,13 +25,19 @@ import useComment from "../store/useComment"
 import useUserModal from "../store/useUserModal"
 import useDetailDialog from "../store/useDetailDialog"
 
+import { Plus } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "../shared/ui/Card"
+import { Button } from "../shared/ui/Button"
+import { useNewPost } from "../store/useNewPost"
+import { PostType } from "../types/postType"
+
 const PostsManager = () => {
   const { selectedPost, setSelectedPost } = useSelectPost()
 
   // detail Dialog
   const { showPostDetailDialog, setShowPostDetailDialog } = useDetailDialog()
   // 게시물 상세 보기
-  const openPostDetail = (post) => {
+  const openPostDetail = (post: PostType) => {
     setSelectedPost(post)
     fetchComments(post.id)
     setShowPostDetailDialog(true)
@@ -93,7 +95,7 @@ const PostsManager = () => {
     updateComment(updatedCommentData)
     setShowEditCommentDialog(false)
   }
-
+  console.log("selectedComment", selectedComment)
   // tags store
   const { tags } = useTags()
 

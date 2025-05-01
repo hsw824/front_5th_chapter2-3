@@ -2,8 +2,17 @@ import { Button } from "../shared/ui/Button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../shared/ui/Dialog"
 import { Input } from "../shared/ui/Input"
 import { Textarea } from "../shared/ui/Textarea"
+import { NewPostType } from "../types/postType"
 
-const AddPostDialog = ({ showAddDialog, setShowAddDialog, newPost, setNewPost, addPost }) => {
+interface PropsType {
+  showAddDialog: boolean
+  setShowAddDialog: React.Dispatch<React.SetStateAction<boolean>>
+  newPost: NewPostType
+  setNewPost: React.Dispatch<React.SetStateAction<NewPostType>>
+  addPost: () => Promise<NewPostType | undefined>
+}
+
+const AddPostDialog = ({ showAddDialog, setShowAddDialog, newPost, setNewPost, addPost }: PropsType) => {
   return (
     <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
       <DialogContent>

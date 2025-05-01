@@ -1,6 +1,13 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../shared/ui/Dialog"
+import { UserType } from "../types/userType"
 
-const UserDialog = ({ showUserModal, setShowUserModal, selectedUser }) => {
+interface PropsType {
+  showUserModal: boolean
+  setShowUserModal: React.Dispatch<React.SetStateAction<boolean>>
+  selectedUser: UserType
+}
+
+const UserDialog = ({ showUserModal, setShowUserModal, selectedUser }: PropsType) => {
   return (
     <Dialog open={showUserModal} onOpenChange={setShowUserModal}>
       <DialogContent>

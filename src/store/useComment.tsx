@@ -1,28 +1,10 @@
 import { useState } from "react"
-
-interface CommentType {
-  body: string
-  id: number
-  likes: number
-  postId: number
-  user: {
-    fullName: string
-    id: number
-    username: string
-  }
-}
-
-interface CommentsByPostId {
-  [postId: string]: CommentType[]
-}
+import { CommentsByPostId } from "../types/commentType"
 
 const getComments = async (postId: string) => {
   try {
     const response = await fetch(`/api/comments/post/${postId}`)
     const data = await response.json()
-
-    console.log("ccccdata", data)
-
     return data.comments
   } catch (error) {
     console.error("댓글 가져오기 오류:", error)
@@ -58,7 +40,7 @@ const useComment = () => {
   }
 
   // 댓글 삭제
-  const deleteComment = async (id, postId) => {
+  const deleteComment = async (id: number, postId: number) => {
     try {
       await fetch(`/api/comments/${id}`, {
         method: "DELETE",
@@ -73,7 +55,7 @@ const useComment = () => {
   }
 
   // 댓글 좋아요
-  const likeComment = async (id, postId) => {
+  const likeComment = async (id: number, postId: number) => {
     try {
       const response = await fetch(`/api/comments/${id}`, {
         method: "PATCH",

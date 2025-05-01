@@ -137,7 +137,7 @@ export const usePost = (queryState, selectedPost, setIsLoading) => {
   }
 
   // 태그별 게시물 가져오기
-  const fetchPostsByTag = async (tag) => {
+  const fetchPostsByTag = async (tag: string) => {
     if (!tag || tag === "all") {
       fetchPosts()
       return
@@ -172,7 +172,7 @@ export const usePost = (queryState, selectedPost, setIsLoading) => {
   }
 
   // 게시물 삭제
-  const deletePost = async (id) => {
+  const deletePost = async (id: number) => {
     try {
       await fetch(`/api/posts/${id}`, {
         method: "DELETE",

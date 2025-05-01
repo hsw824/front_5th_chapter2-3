@@ -1,8 +1,23 @@
 import { Button } from "../shared/ui/Button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../shared/ui/Dialog"
 import { Textarea } from "../shared/ui/Textarea"
+import { CommentType } from "../types/commentType"
 
-const AddCommentDialog = ({ showAddCommentDialog, setShowAddCommentDialog, newComment, setNewComment, addComment }) => {
+interface PropsType {
+  showAddCommentDialog: boolean
+  setShowAddCommentDialog: React.Dispatch<React.SetStateAction<boolean>>
+  newComment: CommentType
+  setNewComment: React.Dispatch<React.SetStateAction<CommentType>>
+  addComment: () => Promise<CommentType | undefined>
+}
+
+const AddCommentDialog = ({
+  showAddCommentDialog,
+  setShowAddCommentDialog,
+  newComment,
+  setNewComment,
+  addComment,
+}: PropsType) => {
   return (
     <Dialog open={showAddCommentDialog} onOpenChange={setShowAddCommentDialog}>
       <DialogContent>

@@ -1,11 +1,5 @@
 import { useState } from "react"
-
-interface CommentType {
-  body: string
-  id: number
-  likes: number
-  postId: number
-}
+import { CommentType } from "../types/commentType"
 
 const useEditComment = () => {
   const [selectedComment, setSelectedComment] = useState<CommentType | null>(null)
@@ -13,6 +7,7 @@ const useEditComment = () => {
   // 댓글 업데이트
   const updateComment = async () => {
     try {
+      console.log("selectedComment", selectedComment)
       const response = await fetch(`/api/comments/${selectedComment!.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

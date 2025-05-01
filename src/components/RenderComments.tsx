@@ -1,6 +1,19 @@
 import { Button } from "../shared/ui/Button"
 import { Edit2, Plus, ThumbsUp, Trash2 } from "lucide-react"
 import { HighlightText } from "./HighlightText"
+import { CommentsByPostId, CommentType } from "../types/commentType"
+
+interface PropsType {
+  postId: number
+  comments: CommentsByPostId
+  setSelectedComment: React.Dispatch<React.SetStateAction<CommentType | null>>
+  deleteComment: (id: number, postId: number) => Promise<void>
+  likeComment: (id: number, postId: number) => Promise<void>
+  setNewComment: React.Dispatch<React.SetStateAction<CommentType>>
+  setShowAddCommentDialog: React.Dispatch<React.SetStateAction<boolean>>
+  setShowEditCommentDialog: React.Dispatch<React.SetStateAction<boolean>>
+  searchQuery: string
+}
 
 export const RenderComments = ({
   postId,
@@ -12,7 +25,7 @@ export const RenderComments = ({
   setShowAddCommentDialog,
   setShowEditCommentDialog,
   searchQuery,
-}) => {
+}: PropsType) => {
   return (
     <div className="mt-2">
       <div className="flex items-center justify-between mb-2">

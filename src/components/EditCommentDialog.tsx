@@ -1,6 +1,15 @@
 import { Button } from "../shared/ui/Button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../shared/ui/Dialog"
 import { Textarea } from "../shared/ui/Textarea"
+import { CommentType } from "../types/commentType"
+
+interface PropsType {
+  showEditCommentDialog: boolean
+  setShowEditCommentDialog: React.Dispatch<React.SetStateAction<boolean>>
+  selectedComment: CommentType | null
+  setSelectedComment: React.Dispatch<React.SetStateAction<CommentType | null>>
+  updateComment: () => Promise<void>
+}
 
 const EditCommentDialog = ({
   showEditCommentDialog,
@@ -8,7 +17,7 @@ const EditCommentDialog = ({
   selectedComment,
   setSelectedComment,
   updateComment,
-}) => {
+}: PropsType) => {
   return (
     <Dialog open={showEditCommentDialog} onOpenChange={setShowEditCommentDialog}>
       <DialogContent>

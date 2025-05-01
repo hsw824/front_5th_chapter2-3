@@ -1,7 +1,25 @@
 import { Button } from "../shared/ui/Button"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../shared/ui/Select"
 
-const Pagination = ({ limit, skip, total, setQueryState }) => {
+interface PropsType {
+  limit: number
+  skip: number
+  total: number
+  setQueryState: React.Dispatch<
+    React.SetStateAction<{
+      skip: number
+      limit: number
+      search: string
+      sortBy: string
+      sortOrder: string
+      tag: string
+      searchQuery: string
+      selectedTag: string
+    }>
+  >
+}
+
+const Pagination = ({ limit, skip, total, setQueryState }: PropsType) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">

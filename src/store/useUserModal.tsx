@@ -1,6 +1,7 @@
 import { useState } from "react"
+import { UserType } from "../types/userType"
 
-const getUserInfo = async (id) => {
+const getUserInfo = async (id: number) => {
   try {
     const response = await fetch(`/api/users/${id}`)
     const userData = await response.json()
@@ -16,7 +17,7 @@ const useUserModal = () => {
   const [selectedUser, setSelectedUser] = useState(null)
 
   // 사용자 모달 열기
-  const openUserModal = async (user) => {
+  const openUserModal = async (user: UserType) => {
     const userData = await getUserInfo(user.id)
     setSelectedUser(userData)
     setShowUserModal(true)

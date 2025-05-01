@@ -2,6 +2,32 @@ import { Edit2, MessageSquare, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react
 import { Table, TableHead, TableHeader, TableRow, TableBody, TableCell } from "../shared/ui/Table"
 import { Button } from "../shared/ui/Button"
 import { HighlightText } from "./HighlightText"
+import { PostType } from "../types/postType"
+import { UserType } from "../types/userType"
+
+interface PropsType {
+  posts: PostType[]
+  searchQuery: string
+  selectedTag: string
+  deletePost: (id: number) => Promise<void>
+  openPostDetail: (post: PostType) => void
+  openUserModal: (user: UserType) => Promise<void>
+  updateURL: () => void
+  setSelectedPost: React.Dispatch<React.SetStateAction<PostType | null>>
+  setShowEditDialog: React.Dispatch<React.SetStateAction<boolean>>
+  setQueryState: React.Dispatch<
+    React.SetStateAction<{
+      skip: number
+      limit: number
+      search: string
+      sortBy: string
+      sortOrder: string
+      tag: string
+      searchQuery: string
+      selectedTag: string
+    }>
+  >
+}
 
 const PostTable = ({
   posts,
@@ -14,7 +40,7 @@ const PostTable = ({
   setSelectedPost,
   setShowEditDialog,
   setQueryState,
-}) => {
+}: PropsType) => {
   return (
     <Table>
       <TableHeader>

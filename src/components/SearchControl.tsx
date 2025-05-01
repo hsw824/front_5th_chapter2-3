@@ -2,6 +2,29 @@ import { Search } from "lucide-react"
 import { Input } from "../shared/ui/Input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../shared/ui/Select"
 
+interface PropsType {
+  searchQuery: string
+  searchPosts: () => Promise<void>
+  selectedTag: string
+  fetchPostsByTag: (tag: string) => Promise<void>
+  updateURL: () => void
+  tags: string[]
+  sortBy: string
+  sortOrder: string
+  setQueryState: React.Dispatch<
+    React.SetStateAction<{
+      skip: number
+      limit: number
+      search: string
+      sortBy: string
+      sortOrder: string
+      tag: string
+      searchQuery: string
+      selectedTag: string
+    }>
+  >
+}
+
 const SearchControl = ({
   searchQuery,
   searchPosts,
@@ -12,7 +35,7 @@ const SearchControl = ({
   sortBy,
   sortOrder,
   setQueryState,
-}) => {
+}: PropsType) => {
   return (
     <div className="flex gap-4">
       <div className="flex-1">
