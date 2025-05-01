@@ -1,14 +1,15 @@
 import { Button } from "../shared/ui/Button"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../shared/ui/Select"
-import { useStore } from "../store/useStore"
 
-const Pagination = () => {
-  const { limit, setLimit, skip, setSkip, total } = useStore()
+const Pagination = ({ limit, skip, total, setQueryState }) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
         <span>표시</span>
-        <Select value={limit.toString()} onValueChange={(value) => setLimit(Number(value))}>
+        <Select
+          value={limit.toString()}
+          onValueChange={(value) => setQueryState((prev) => ({ ...prev, limit: Number(value) }))}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="10" />
           </SelectTrigger>
@@ -21,10 +22,16 @@ const Pagination = () => {
         <span>항목</span>
       </div>
       <div className="flex gap-2">
-        <Button disabled={skip === 0} onClick={() => setSkip(Math.max(0, skip - limit))}>
+        <Button
+          disabled={skip === 0}
+          onClick={() => setQueryState((prev) => ({ ...prev, skip: Math.max(0, skip - limit) }))}
+        >
           이전
         </Button>
-        <Button disabled={skip + limit >= total} onClick={() => setSkip(skip + limit)}>
+        <Button
+          disabled={skip + limit >= total}
+          onClick={() => setQueryState((prev) => ({ ...prev, skip: skip + limit }))}
+        >
           다음
         </Button>
       </div>

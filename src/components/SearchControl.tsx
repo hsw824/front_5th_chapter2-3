@@ -1,23 +1,18 @@
 import { Search } from "lucide-react"
 import { Input } from "../shared/ui/Input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../shared/ui/Select"
-import { useStore } from "../store/useStore"
 
-const SearchControl = () => {
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchPosts,
-    selectedTag,
-    setSelectedTag,
-    fetchPostsByTag,
-    updateURL,
-    tags,
-    sortBy,
-    setSortBy,
-    sortOrder,
-    setSortOrder,
-  } = useStore()
+const SearchControl = ({
+  searchQuery,
+  searchPosts,
+  selectedTag,
+  fetchPostsByTag,
+  updateURL,
+  tags,
+  sortBy,
+  sortOrder,
+  setQueryState,
+}) => {
   return (
     <div className="flex gap-4">
       <div className="flex-1">
@@ -27,7 +22,7 @@ const SearchControl = () => {
             placeholder="게시물 검색..."
             className="pl-8"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => setQueryState((prev) => ({ ...prev, searchQuery: e.target.value }))}
             onKeyPress={(e) => e.key === "Enter" && searchPosts()}
           />
         </div>
@@ -35,7 +30,7 @@ const SearchControl = () => {
       <Select
         value={selectedTag}
         onValueChange={(value) => {
-          setSelectedTag(value)
+          setQueryState((prev) => ({ ...prev, selectedTag: value }))
           fetchPostsByTag(value)
           updateURL()
         }}
@@ -52,7 +47,7 @@ const SearchControl = () => {
           ))}
         </SelectContent>
       </Select>
-      <Select value={sortBy} onValueChange={setSortBy}>
+      <Select value={sortBy} onValueChange={(newValue) => setQueryState((prev) => ({ ...prev, sortBy: newValue }))}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="정렬 기준" />
         </SelectTrigger>
@@ -63,7 +58,10 @@ const SearchControl = () => {
           <SelectItem value="reactions">반응</SelectItem>
         </SelectContent>
       </Select>
-      <Select value={sortOrder} onValueChange={setSortOrder}>
+      <Select
+        value={sortOrder}
+        onValueChange={(newValue) => setQueryState((prev) => ({ ...prev, sortOrder: newValue }))}
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="정렬 순서" />
         </SelectTrigger>

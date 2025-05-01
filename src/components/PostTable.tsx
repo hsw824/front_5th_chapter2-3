@@ -1,6 +1,5 @@
 import { Edit2, MessageSquare, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react"
 import { Table, TableHead, TableHeader, TableRow, TableBody, TableCell } from "../shared/ui/Table"
-import { useStore } from "../store/useStore"
 import { Button } from "../shared/ui/Button"
 import { HighlightText } from "./HighlightText"
 
@@ -11,10 +10,10 @@ const PostTable = ({
   deletePost,
   openPostDetail,
   openUserModal,
-  setSelectedTag,
   updateURL,
   setSelectedPost,
   setShowEditDialog,
+  setQueryState,
 }) => {
   return (
     <Table>
@@ -45,7 +44,7 @@ const PostTable = ({
                           : "text-blue-800 bg-blue-100 hover:bg-blue-200"
                       }`}
                       onClick={() => {
-                        setSelectedTag(tag)
+                        setQueryState((prev) => ({ ...prev, tag }))
                         updateURL()
                       }}
                     >

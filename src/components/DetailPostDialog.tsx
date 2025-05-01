@@ -5,8 +5,10 @@ import { RenderComments } from "./RenderComments"
 const DetailPostDialog = ({
   showPostDetailDialog,
   setShowPostDetailDialog,
+
   selectedPost,
   searchQuery,
+
   comments,
   setSelectedComment,
   deleteComment,
